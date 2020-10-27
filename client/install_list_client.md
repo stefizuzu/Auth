@@ -8,6 +8,8 @@ npm i --save lodash
 npm install react-youtube
 npm install react-fetch
 npm install xml2js
+npm install react-responsive-modal --save
+npm i reactstrap
 
 //see modules
 npm ls --depth=0

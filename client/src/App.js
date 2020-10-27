@@ -43,7 +43,7 @@ function App() {
                 <br />
               </a>
 
-              {isAuthenticated() ? <a>DA</a> : <a>nu</a>}
+              {isAuthenticated() ? <a></a> : <a></a>}
 
               <button
                 style={{ float: "right" }}

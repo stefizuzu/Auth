@@ -4,4 +4,5 @@ module.exports = {
   typeOfUser: "",
   isLoggedin: false,
   patientData: [],
+  notes: [],
 };

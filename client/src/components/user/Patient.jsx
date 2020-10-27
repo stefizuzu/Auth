@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import YouTube from "react-youtube";
 import "../../css/PatientPage.css";
+import  GeneratedData from "../GeneratedData"
+
+
 class Patient extends Component {
-  state = {};
   render() {
     // video
     const opts = {
@@ -12,9 +14,8 @@ class Patient extends Component {
         autoplay: 0,
       },
     };
-
     return (
-      <div>
+      <div style={{ margin : "auto", width: "60%", marginTop:"50px", marginBottom:"50px"}}>
         <br />
         <h2 className="patient_videos">Patient Videos</h2>
         <br />
@@ -23,6 +24,8 @@ class Patient extends Component {
           <YouTube videoId="MsXlZ_phGNY" opts={opts} onReady={this._onReady} />
           <YouTube videoId="Ez2GeaMa4c8" opts={opts} onReady={this._onReady} />
         </div>
+        <h3>My Data</h3>
+        <GeneratedData />
       </div>
     );
   }
@@ -31,5 +34,4 @@ class Patient extends Component {
     event.target.pauseVideo();
   }
 }
-
 export default Patient;

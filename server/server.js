@@ -40,9 +40,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "stefi2210",
-  database: "stefizuzu",
+  password: "root",
+  database: "db",
 });
+
 
 // responses
 app.get("/", (req, res) => {
@@ -73,6 +74,44 @@ app.get("/isLogged", (req, res) => {
   res.send(false);
 });
 
+app.get("/getNotes", (req, res) => {
+  console.log("Getting notes...");
+  const query = "select * from PD_Notes where userID = ?";
+
+  db.query(query, userData.id, (err, result) => {
+    if (err) console.log("Error : query failed");
+
+    if (result) {
+      var notes = [];
+      for (var i = 0; i < result.length; i++) {
+        notes[i] = result[i];
+      }
+    }
+    res.send(notes);
+  });
+});
+
+
+app.post('/newNote', (req, res) => {
+  const note = req.body.note;
+  const query = "INSERT INTO PD_Notes SET ?"
+  const values = {userId: userData.id, note: note};
+  console.log(values);
+  db.query(query, [values], (err, result) => {
+    if (err) console.log("Error : query failed");
+    console.log("Note added to Database!");
+  });
+})
+
+app.post('/deleteNote', (req, res) => {
+  const noteId = req.body.noteId;
+  const query = "DELETE FROM PD_Notes WHERE noteId = ?"
+  db.query(query, noteId, (err, result) => {
+    if (err) console.log("Error : query failed");
+    console.log("Note deleted from the Database!");
+  });
+})
+
 app.get("/getUserData", (req, res) => {
   console.log("User tried to log in");
   const query = "select * from PD_Accounts where userID = ?";
@@ -89,6 +128,8 @@ app.get("/getUserData", (req, res) => {
     res.send(userData);
   });
 });
+
+
 
 app.get("/getPatientData", (req, res) => {
   const query = "select * from PD_PatientDataAccess where userId =?";

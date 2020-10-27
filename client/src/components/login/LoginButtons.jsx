@@ -3,6 +3,7 @@ import Axios from "axios";
 import userData from "./userData_Client";
 import "../../css/Login.css";
 
+
 var child;
 var timer;
 
@@ -37,11 +38,19 @@ const getUserData = () => {
     userData.typeOfUser = res.data.typeOfUser;
     if (userData.email) userData.isLoggedin = true;
     else alert("You are not a registered user!");
-    if (res.data.typeOfUser !== "patient") {
-      getPatients();
+    getPatients();
+    if (res.data.typeOfUser == "researcher") {
+      getNotes();  
     }
     console.log(userData);
   });
+};
+
+const getNotes = () => {
+  Axios.get("http://localhost:3001/getNotes").then((res) => {
+      userData.notes = res.data;
+  });
+  console.log(userData.notes);
 };
 
 const LoginButtons = () => {

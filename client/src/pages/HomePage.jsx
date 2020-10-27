@@ -3,8 +3,8 @@ import userData from "../components/login/userData_Client";
 
 // pages
 import PatientPage from "../components/user/Patient";
-import PhysicanPage from "../components/user/Researcher";
-import ResearcherPage from "../components/user/Physician";
+import PhysicanPage from "../components/user/Physician";
+import ResearcherPage from "../components/user/Researcher";
 
 class HomePage extends Component {
   renderUserPage = () => {
